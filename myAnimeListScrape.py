@@ -1,19 +1,16 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pandas as pd
-import time
 
 driver = webdriver.Firefox()
 driver.get("https://myanimelist.net/topanime.php")
-
-time.sleep(3)
+driver.implicitly_wait(5)
 
 top_anime = driver.find_elements(By.CLASS_NAME, "ranking-list")
 
 rank = []
 anime_title = []
 score = []
-
 
 for anime in top_anime:
     rank.append(anime.find_element(By.XPATH, "./td[1]").text)
