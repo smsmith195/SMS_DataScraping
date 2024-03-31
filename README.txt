@@ -7,6 +7,8 @@ How the MAL web scraper works:
 - Get the rank, anime title and score from the table
 - Save the data into a spreadsheet
 
+##########
+
 Python/Selenium Web Scraper for Football Score data from Adam Choi
 
 The file is 'footballDataScrape' in the 'app' folder to read the code.
@@ -18,3 +20,11 @@ How the Adam Choi web scraper works:
 - If country value is valid, selects the chosen country
 - Get the date, home team, score and away team data from all match tables
 - Saves the data into a spreadsheet
+
+##########
+
+Python/Selenium Web Scraper for Job Searching using Indeed
+
+The file is 'indeedScrape' in the 'app' folder to read the code.
+
+INSTRUCTIONS COMING SOON
