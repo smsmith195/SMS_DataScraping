@@ -6,6 +6,8 @@ import pandas as pd
 # Prompts user to select which country they wish to get the data from before launching Selenium
 countryChoice = input("Choose a Country, this is case-sensitive: ")
 print(countryChoice)
+leagueChoice = input("Choose a League. This is also case-sensitive: ")
+print(leagueChoice)
 
 # Opens Firefox on the Adam Choi website
 driver = webdriver.Firefox()
@@ -14,7 +16,8 @@ driver.implicitly_wait(5)
 
 # Create variables for page setup
 all_matches_button = driver.find_element(By.XPATH, "//label[@analytics-event='All matches']")
-dropdown = Select(driver.find_element(By.ID, "country"))
+c_dropdown = Select(driver.find_element(By.ID, "country"))
+l_dropdown = Select(driver.find_element(By.ID, "league"))
 
 # XPATH references for table columns
 date_element = "./td[1]"
@@ -35,11 +38,24 @@ fileName = "football_data.csv"
 def setUpPage():
     all_matches_button.click()
     try:
-        dropdown.select_by_visible_text(countryChoice)
+        countryDropdownSelect()
+        leagueDropdownSelect()
     except:
-        print("Invalid country choice, closing program down")
-        driver.quit()
-        quit()
+        closeOnFail()
+
+# Selects country chosen by the user
+def countryDropdownSelect():
+    c_dropdown.select_by_visible_text(countryChoice)
+
+# Selects league chosen by user
+def leagueDropdownSelect():
+    l_dropdown.select_by_visible_text(leagueChoice)
+
+# Closes down application if selections are invalid
+def closeOnFail():
+    print("Invalid selection, closing program down")
+    driver.quit()
+    quit()
 
 # Gets the table on the page and extracts data
 def getMatchData():
