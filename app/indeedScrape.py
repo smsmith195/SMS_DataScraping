@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 import pandas as pd
 
 # User input variables for searching a job title and location
@@ -16,6 +17,8 @@ jobSearchField = "text-input-what"
 jobLocationField = "text-input-where"
 submitButton = "//*[@id='jobsearch']/div/div[2]/button"
 
+nextButton = "[aria-label='Next Page']"
+
 # Lists for extracted data for the spreadsheet
 job_title = []
 link_ = []
@@ -29,7 +32,6 @@ def setupPage():
 # Gets link text and hyperlinks and gets it ready for the spreadsheet
 def getJobs():
     links = driver.find_elements(By.CLASS_NAME, "jcs-JobTitle")
-
     for link in links:
         job_title.append(link.text)
         link_.append(link.get_attribute("href"))
@@ -42,5 +44,6 @@ def createSpreadsheet():
 
 setupPage()
 getJobs()
+#driver.find_element(By.CSS_SELECTOR, nextButton).click()
 driver.quit()
 createSpreadsheet()
