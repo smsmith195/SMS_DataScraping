@@ -27,4 +27,7 @@ Python/Selenium Web Scraper for Job Searching using Indeed
 
 The file is 'indeedScrape' in the 'app' folder to read the code.
 
-INSTRUCTIONS COMING SOON
+- Prompts user to input job title and location in the console
+- Opens Indeed and uses the previously entered input to conduct a search
+- Retrieves the job title, company, location and job description URL from the search results
+- Saves retrieved data into a spreadsheet
