@@ -1,7 +1,9 @@
 # Import required packages
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
 import pandas as pd
+
 
 # Adds the appropriate element from top_anime to the appropriate lists
 def get_anime_data(driver):
@@ -14,15 +16,19 @@ def get_anime_data(driver):
         anime_data.append({'Rank': rank, 'Title': title, 'Score': score})
     return anime_data
 
+
 # This function makes use of Pandas to write the extracted data to a csv file
 def create_spreadsheet(anime_data, file_name='top_anime_data.csv'):
     df = pd.DataFrame(anime_data)
     df.to_csv(file_name, index=False)
     print(df)
 
+
 # Code execution
 def main():
-    driver = webdriver.Firefox()
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
     driver.get("https://myanimelist.net/topanime.php")
     driver.implicitly_wait(5)
 

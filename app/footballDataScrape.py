@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.firefox.options import Options
 import pandas as pd
 
 
@@ -66,7 +67,9 @@ def create_spreadsheet(match_data, file_name='football_data.csv'):
 # Code execution starts here
 def main():
     country_choice, league_choice = get_user_input()
-    driver = webdriver.Firefox()
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
     set_up_page(driver, country_choice, league_choice)
     match_data = get_match_data(driver)
     driver.quit()

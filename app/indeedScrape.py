@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
 import pandas as pd
 
 # Gets user input and returns the value
@@ -43,7 +44,9 @@ def create_spreadsheet(job_data, file_name='job_list.csv'):
 # Code execution
 def main():
     job_name, job_location = get_user_input()
-    driver = webdriver.Firefox()
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
     driver.get("https://uk.indeed.com/")
 
     setup_page(driver, job_name, job_location)
